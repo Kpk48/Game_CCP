@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">🌊 OceanQuest</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="games.html">Games</a></li>
+                <li class="nav-item"><a class="nav-link" href="quiz.html">Quiz</a></li>
+                <li class="nav-item"><a class="btn btn-primary text-white ms-2" id="login-btn" href="login.html">Login</a></li>
+                <li class="nav-item"><a class="btn btn-success text-white ms-2" id="signup-btn" href="signup.html">Sign Up</a></li>
+                <li class="nav-item"><button class="btn btn-danger text-white ms-2" id="logout-btn" style="display:none;">Logout</button></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script>
+    async function checkUserSession() {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+            document.getElementById("logout-btn").style.display = "inline";
+            document.getElementById("login-btn").style.display = "none";
+            document.getElementById("signup-btn").style.display = "none";
+        } else {
+            document.getElementById("logout-btn").style.display = "none";
+            document.getElementById("login-btn").style.display = "inline";
+            document.getElementById("signup-btn").style.display = "inline";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", checkUserSession);
+</script>
